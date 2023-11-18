@@ -1,0 +1,40 @@
+﻿@inherits KeyComponentBase
+
+<h4 class="text-center text-primary">Sleuteluitgifte</h4>
+
+@if (Keyservice?.GetKeyIssues() == null)
+{
+    <p><em>Loading..</em></p>
+}
+else
+{
+    @if (Keyservice?.issue.Count == 0)
+    {
+        <div class="text-danger text-center">
+            Er zijn geen gegevens gevonden
+        </div>
+    }
+
+    @foreach (var key in Keyservice.issue)
+    {
+        <table class="table table-striped text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th  class="col-md-2">Datum</th>
+                    <th class="col-md-4">Titel</th>
+                    <th class="col-md-4">Omschrijving</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@key.DateCreated.ToShortDateString()</td>
+                    <td>@key.IssuedByUserId</td>
+                    <td>@key.KeyId</td>
+                    <td><button class="btn btn-outline-primary"><span class="oi oi-eye"></span></button></td>
+                </tr>
+            </tbody>
+
+        </table>
+    }
+}

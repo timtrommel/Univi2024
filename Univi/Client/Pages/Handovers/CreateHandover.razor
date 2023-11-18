@@ -1,0 +1,55 @@
+﻿@page "/CreateHandover"
+@inherits CreateHandoverBase
+
+<h4 class="text-primary text-center">Maak een nieuwe overdracht aan</h4>
+
+<EditForm Model="handover" OnInvalidSubmit="CreateHandover">
+    @*Date on which date the handover applies*@
+    <div class="row mb-1">
+        <div class="col">
+            Datum
+        </div>
+        <div class="col">
+            <InputDate class="form-control" @bind-Value="handover.DateHandover"></InputDate>
+        </div>
+    </div>
+    @*Title*@
+    <div class="row mb-1">
+        <div class="col">
+            Titel
+        </div>
+        <div class="col">
+            <InputText class="form-control" @bind-Value="handover.Title"></InputText>
+        </div>
+    </div>
+    @*Description of handover*@
+    <div class="row mb-1">
+        <div class="col">
+            Omschrijving
+        </div>
+        <div class="col">
+            <InputTextArea class="form-control" @bind-Value="handover.Description"></InputTextArea>
+        </div>
+    </div>
+    @*Kindof handover select*@
+    <div class="row mb-1">
+        <div class="col">
+            Soort
+        </div>
+        <div class="col">
+            <InputSelect class="form-control" @bind-Value="handover.KindofHandoverId">
+                <option id="" selected disabled>Selecteer</option>
+                @if(kindofReportService != null)
+                {
+                    @foreach (var item in kindofReportService.KindofReports)
+                    {
+                        <option id="@item.Id">@item.Name</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+
+</EditForm>
+
