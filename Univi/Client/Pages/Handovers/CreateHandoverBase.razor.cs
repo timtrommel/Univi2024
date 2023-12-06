@@ -11,31 +11,31 @@ namespace Univi.Client.Pages.Handovers
         protected IHandoverService? handoverService { get; set; }
         [Inject]
         protected IKindofreportService? kindofReportService { get; set; }
+        [Inject]
+        NavigationManager? Navigation { get; set; }
+
+        protected bool NoStartEnd { get; set; } = true;
 
         //Create instance of handover
         protected Handover handover = new()
         {
             DateCreated = DateTime.Now,
+            StartDate = DateTime.Now,
+            EndDate = DateTime.Now,
+            StartTime = DateTime.Now,
+            EndTime = DateTime.Now,
             DateHandover = DateTime.Now,
             DateLastEdit = DateTime.Now,
-            Title = "",
-            AddedById = "",
-            KindofHandoverId = 1,
-            BuildingId = 1,
-            Description = "",
         };
 
-        protected async void CreateHandover()
+        //Send the form
+        protected async Task HandleSubmit()
         {
-            if (handoverService != null && handover != null)
+            if (handoverService != null) // Create a new handover
             {
                 await handoverService.AddHandoverAsync(handover);
+                Navigation?.NavigateTo("/");
             }
-            if(kindofReportService != null)
-            {
-                await kindofReportService.GetKindofReports();
-            }
-
         }
     }
 }

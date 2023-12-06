@@ -1,38 +1,56 @@
 ﻿@inherits HandoverComponentBase
-    <h4 class="text-center text-success">Overdracht</h4>
+<h4 class="text-center text-success">Overdracht</h4>
 
-    @if (HandoverService?.Handovers == null)
+@if (HandoverService?.HandoversList == null)
+{
+    <p><em>Loading..</em></p>
+}
+else if (HandoverService.HandoversList.Count == 0)
+{
+    <div class="text-danger text-center">
+        Er zijn geen gegevens gevonden
+    </div>
+}
+else
+{
+    @foreach (var item in HandoverService.HandoversList)
     {
-        <p><em>Loading..</em></p>
-    }
-    else
-    {
-        @if (HandoverService.Handovers.Count == 0)
-        {
-            <div class="text-danger text-center">
-                Er zijn geen gegevens gevonden
-            </div>
-        }
 
-        @foreach (var handover in HandoverService.Handovers)
-        {
-            <table class="table table-striped text-center">
-                <thead class="thead-dark">
-                    <tr>
-                        <th class="col-md-2">Datum</th>
-                        <th class="col-md-4">Titel</th>
-                        <th class="col-md-4">Omschrijving</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>@handover.DateHandover.ToShortDateString()</td>
-                        <td>@handover.Title</td>
-                        <td>@handover.Description</td>
-                        <td><button class="btn btn-outline-primary"><span class="oi oi-eye"></span></button></td>
-                    </tr>
-                </tbody>
-            </table>
-        }
+        <table class="table text-center">
+            <thead class="tbl-bg">
+                <tr class="">
+                    <th class="col">Datum</th>
+                    <th class="col">Soort</th>
+                    <th class="col">Titel</th>
+                    <th class="col">Omschrijving</th>
+                    <th class="col">Datum van / tot</th>
+                    <th class="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td>@item.DateCreated.ToShortDateString()</td>
+                    @if (KindofReportService != null)
+                    {
+                        <td>@KindofReportService.KindofReports.Where(m => m.Id == item.KindofHandoverId).Select(m => m.Name).FirstOrDefault()</td>
+                    }
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    @if (item.NoStartEnd != true)
+                    {
+                        <td>@item.StartDate.ToShortDateString() @item.StartTime.ToShortTimeString() t/m @item.EndDate.ToShortDateString() @item.EndTime.ToShortTimeString()</td>
+                    }
+                    else
+                    {
+                        <td>N.V.T</td>
+                    }
+                    <td>
+                        <button class="btn btn-outline-primary mb-1" @onclick="(() => GetReport(item.Id))">
+                            <i class="oi oi-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     }
+}

@@ -8,13 +8,14 @@ namespace Univi.Client.Services.HandoverService
     {
         #region CTOR
         private readonly HttpClient _http;
+
         public HandoverService(HttpClient http)
         {
             _http = http;
         }
         #endregion
 
-        public List<Handover> Handovers { get; set; }
+        public List<Handover> HandoversList { get; set; }
 
         public async Task AddHandoverAsync(Handover handover)
         {
@@ -26,7 +27,7 @@ namespace Univi.Client.Services.HandoverService
             var result = await _http.GetFromJsonAsync<List<Handover>>("api/handover");
             if (result != null)
             {
-                Handovers = result;
+                HandoversList = result;
             }
         }
 
@@ -40,7 +41,7 @@ namespace Univi.Client.Services.HandoverService
             return null;
         }
 
-        public async Task<Handover?> GetSingleHandovers(string id)
+        public async Task<Handover?> GetSingleHandover(int? id)
         {
             var handover = await _http.GetAsync($"/api/handover/{id}");
             if (handover.StatusCode == HttpStatusCode.OK)
@@ -50,7 +51,7 @@ namespace Univi.Client.Services.HandoverService
             return null;
         }
 
-        public async Task SetItemInactive(string id)
+        public async Task SetItemInactive(int id)
         {
             // Send a POST request to update the item status
             await _http.PostAsJsonAsync($"api/handover/inactive", id);

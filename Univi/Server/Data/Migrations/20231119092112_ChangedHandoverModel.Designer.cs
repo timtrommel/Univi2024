@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Univi.Server.Data;
 
@@ -11,9 +12,11 @@ using Univi.Server.Data;
 namespace Univi.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119092112_ChangedHandoverModel")]
+    partial class ChangedHandoverModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -462,7 +465,7 @@ namespace Univi.Server.Data.Migrations
                     b.Property<int>("BuildingId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateArchived")
+                    b.Property<DateTime?>("DateArchived")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateCreated")
@@ -471,7 +474,7 @@ namespace Univi.Server.Data.Migrations
                     b.Property<DateTime>("DateHandover")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateLastEdit")
+                    b.Property<DateTime?>("DateLastEdit")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DateOfBirth")
@@ -484,10 +487,10 @@ namespace Univi.Server.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -520,10 +523,10 @@ namespace Univi.Server.Data.Migrations
                     b.Property<string>("ReportNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime?>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")

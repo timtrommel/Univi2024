@@ -102,3 +102,11 @@ a, .btn-link {
     .text-orange {
     color: orange;
 }
+.tbl-bg {
+    background-color: #485470;
+    color: white;
+}
+.dashboard-title {
+    color: #485470;
+    font-family: Arial;
+}

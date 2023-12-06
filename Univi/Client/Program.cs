@@ -13,6 +13,7 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
+
 builder.Services.AddHttpClient("Univi.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
 //Add the new created services
@@ -24,9 +25,11 @@ builder.Services.AddScoped<IKindofreportService, KindofreportService>();
 builder.Services.AddScoped<IMalfunctionService,MalfunctionService>();
 builder.Services.AddScoped<IKindofMalfunctionService, KindofMalfunctionService>();
 
+
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("Univi.ServerAPI"));
 
 builder.Services.AddApiAuthorization();
+builder.Services.AddBootstrapBlazor(); // Add this line
 
 await builder.Build().RunAsync();

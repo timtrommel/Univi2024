@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Univi.Server.Data;
 
@@ -11,9 +12,11 @@ using Univi.Server.Data;
 namespace Univi.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231118083904_DeletedRequiredHandoverFields")]
+    partial class DeletedRequiredHandoverFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -462,7 +465,7 @@ namespace Univi.Server.Data.Migrations
                     b.Property<int>("BuildingId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateArchived")
+                    b.Property<DateTime?>("DateArchived")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateCreated")
@@ -471,7 +474,7 @@ namespace Univi.Server.Data.Migrations
                     b.Property<DateTime>("DateHandover")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateLastEdit")
+                    b.Property<DateTime?>("DateLastEdit")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DateOfBirth")
@@ -484,14 +487,20 @@ namespace Univi.Server.Data.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("HandoverEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("HandoverEndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("HandoverStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("HandoverStartTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -505,9 +514,6 @@ namespace Univi.Server.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("NoStartEnd")
-                        .HasColumnType("bit");
-
                     b.Property<string>("OtherInformation")
                         .HasColumnType("nvarchar(max)");
 
@@ -516,15 +522,6 @@ namespace Univi.Server.Data.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ReportNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()

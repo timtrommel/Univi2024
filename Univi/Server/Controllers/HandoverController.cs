@@ -33,10 +33,12 @@ namespace Univi.Server.Controllers
         #endregion
 
         #region POST
-        // Post a new handover
+        //Create a new handover
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Handover?> PostHandover(Handover handover)
         {
+            var result = await _HandoverService.CreateHandover(handover);
+            return result;
         }
         #endregion
 

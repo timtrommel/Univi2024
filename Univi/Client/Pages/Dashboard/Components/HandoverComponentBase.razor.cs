@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Univi.Client.Services.HandoverService;
+using Univi.Client.Services.KindofReportService;
 
 namespace Univi.Client.Pages.Dashboard.Components
 {
@@ -7,7 +8,11 @@ namespace Univi.Client.Pages.Dashboard.Components
     {
         [Inject]
         protected IHandoverService? HandoverService { get; set; }
-
+        [Inject]
+        protected IKindofreportService? KindofReportService { get; set; }
+        [Inject]
+        protected NavigationManager? Navigation { get; set; }
+       
 
         protected override async Task OnInitializedAsync()
         {
@@ -15,6 +20,19 @@ namespace Univi.Client.Pages.Dashboard.Components
             {
                 await HandoverService.GetHandovers();
             }
+            if (KindofReportService != null)
+            {
+                await KindofReportService.GetKindofReports();
+            }
         }
+
+        protected void GetReport(int id)
+        {
+            if(HandoverService != null)
+            {
+                Navigation.NavigateTo($"/Handoverdetails/{id}");
+            }
+        } 
+
     }
 }

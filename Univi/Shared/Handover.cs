@@ -9,40 +9,42 @@ namespace Univi.Shared
         public int Id { get; set; }
         [Display(Name = "Title")]
         [Required(ErrorMessage = "De titel is verplicht")]
-        public required string Title { get; set; }
+        public string? Title { get; set; }
         [Display(Name = "omschrijving")]
         [Required(ErrorMessage = "De omschrijving is verplicht")]
-        public required string Description { get; set; }
+        public string? Description { get; set; }
         [Display(Name = "Soort")]
         [Required(ErrorMessage = "Het soort is verplicht")]
-        public required int KindofHandoverId { get; set; }
+        public int KindofHandoverId { get; set; }
         [Display(Name = "Gebouw")]
         [Required(ErrorMessage = "Het gebouw is verplicht")]
-        public required int BuildingId { get; set; }
+        public  int BuildingId { get; set; }
         public bool IsActive { get; set; } = true;
+        public bool NoStartEnd { get; set; }
+        public string? ReportNo { get; set; }
 
         //Date information
         [Display(Name = "Datum aangemaakt")]
-        public required DateTime DateCreated { get; set; }
+        public  DateTime DateCreated { get; set; }
         [Display(Name = "Datum ")]
-        public required DateTime DateHandover { get; set; } // Sets the date on which date the handover is related to.
+        public  DateTime DateHandover { get; set; } // Sets the date on which date the handover is related to.
         [Display(Name = "Laatst gewijzigd")]
-        public required DateTime? DateLastEdit { get; set; }
-        public DateTime? DateArchived { get; set; }
+        public  DateTime DateLastEdit { get; set; }
+        public DateTime DateArchived { get; set; }
 
         // If the handover has a start and a end date
         [Display(Name = "Startdatum")]
-        public DateTime? HandoverStartDate { get; set; }
+        public DateTime StartDate { get; set; }
         [Display(Name = "Starttijd")]
-        public DateTime? HandoverStartTime { get; set; }
+        public DateTime StartTime { get; set; }
         [Display(Name = "Einddatum")]
-        public DateTime? HandoverEndDate { get; set; }
+        public DateTime EndDate { get; set; }
         [Display(Name = "Eindtijd")]
-        public DateTime? HandoverEndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         //User related information
         [Display(Name = "Toegevoegd door")]
-        public required string AddedById { get; set; }
+        public  string? AddedById { get; set; }
         [Display(Name = "Laatst aangepast door")]
         public string? LastEditById { get; set; }
         [Display(Name = "Geachiveerd door")]
